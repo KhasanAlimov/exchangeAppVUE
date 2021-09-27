@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport"
+					content="width=device-width, initial-scale=1.0">
+		<title>Обмен криптовалют</title>
+
+		<!-- Css library Tailwind -->
+		<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
+					rel="stylesheet">
+		<link rel="stylesheet"
+					href="style.css">
+
+		<!-- Google fonts -- font family Vollkorn -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Vollkorn&display=swap"
+					rel="stylesheet">
+
+		<!-- Font awesome CDN -->
+		<link rel="stylesheet"
+					href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+					integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm"
+					crossorigin="anonymous">
+
+		<!-- Vue js CDN -->
+		<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+	</head>
+
+	<body>
+		<div id="app"
+				 class="flex items-center h-screen">
+
+			<div class="md:w-10/12 w-11/12 mx-auto p-2 max-w-screen-lg"
+					 style="font-family: 'Vollkorn', serif;">
+
+				<!-- Headline -->
+				<div class="mb-16">
+					<h1 class="text-4xl">
+						Crypto Exchange
+					</h1>
+	  			<p class="mt-1">
+	  				Exchange fast and easy
+	  			</p>
+				</div>
+				
+				<!-- Form -->
+				<div id="exchangeForm">
+					<form>
+						<div id="exchangeInputs"
+								 class="sm:flex justify-between">
+
+							<!-- Input from left side -->
+							<div id="leftSide"
+									 class="flex rounded-sm bg-gray-50 relative fields hideList">
+
+								<input type="number"
+											 min="0"
+											 id="inputField"
+											 class="outline-none py-1.5 px-2 w-8/12 bg-transparent"
+											 v-model="inputVal"
+								>
+							 	<active-currency :index="fromCurrency" dir="from" @click.native="openList"></active-currency>
+							 	<searchfromlist v-model="searchVal"></searchfromlist>
+							 	<closelist @click.native="closeList"></closelist>
+							 	<currencies-list :arr="searchInput"></currencies-list>
+						 	</div>
+
+						 	<div class="w-1/12 icons-color flex justify-center items-center my-3 sm:ml-0 ml-auto">
+						 		<i class="fas fa-exchange-alt cursor-pointer transform rotate-90 sm:rotate-0"
+						 			 id="swap"
+						 			 @click="swap">
+						 		</i>
+						 	</div>
+
+						 	<!-- Input from right side -->
+						 	<div id="rightSide"
+						 			 class="flex rounded-sm bg-gray-50 relative fields hideList">
+								<div class="py-1.5 px-2 w-8/12"
+										 id="estimatedField">
+								<p class="text-red-500"
+									 v-if="inputVal < isMinAmount">
+									Not enough amount!
+								</p>
+								<p v-else v-text="estimateAmont"></p>
+								</div>
+							 	<active-currency :index="toCurrency" dir="to" @click.native="openList"></active-currency>
+							 	<searchfromlist v-model="searchVal"></searchfromlist>
+							 	<closelist @click.native="closeList"></closelist>
+							 	<currencies-list :arr="searchInput"></currencies-list>
+						  </div>
+						</div>
+
+						<div class="mt-5">
+							<label for="ethereumAddress">
+								Your Ethereum address
+							</label>
+
+							<div class="sm:flex justify-between">
+								<input type="text"
+											 id="ethereumAddress"
+											 class="sm:w-4/5 w-full sm:mb-0 mb-2 outline-none bg-gray-50 py-1.5 px-2 rounded-sm">
+
+								<div class="sm:w-2/12 sm:mt-0 mt-2 relative text-center">
+									<button type="submit"
+													class="w-full text-white outline-none py-1.5 px-2 rounded-sm">
+										Exchange
+									</button>
+									<p class="text-red-500 w-full absolute -bottom-5"
+										 v-if="pairIsInactive">
+										Pair is inactive
+									</p>
+								</div>
+							</div>
+						</div>
+						
+					</form>
+				</div>	
+
+			</div>
+		</div>
+
+		<script src="main.js"></script>
+	</body>
+</html>

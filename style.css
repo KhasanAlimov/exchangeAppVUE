@@ -1,0 +1,43 @@
+.icons-color {
+	color: #11B3FE;
+}
+
+@media screen and (min-width: 640px) {
+	#leftSide, #rightSide {
+		width: 45%;
+	}
+}
+
+#leftSide, #rightSide, #ethereumAddress, #cryptoList {
+	border: solid 1px #E3EBEF;
+}
+
+#exchangeForm button {
+	background: #11B3FE;
+}
+
+#exchangeForm button:hover {
+	background: #0095E0;
+}
+
+#exchangeForm .currencies::before {
+	content: '';
+	border-left: solid 1px #e3ebef;
+	height: 80%;
+	position: absolute;
+	top: 4px;
+	left: 0;
+}
+
+/*Hide scrolbar for crypto currencies list*/
+#cryptoList::-webkit-scrollbar {
+  display: none;
+}
+
+#cryptoList {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.hideList .currencyList {
+	display: none !important;
+}
